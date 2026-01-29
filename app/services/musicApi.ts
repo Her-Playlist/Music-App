@@ -5,28 +5,28 @@ import axios from 'axios';
 // Helper to convert API song to app song format
 export const convertApiSongToAppSong = (apiSong: any): Song => {
   let downloadUrl = '';
-  
+
   // Check all possible download URL formats
   if (apiSong.downloadUrl && Array.isArray(apiSong.downloadUrl) && apiSong.downloadUrl.length > 0) {
     // Try to get the highest quality URL from downloadUrl array
     downloadUrl = apiSong.downloadUrl[apiSong.downloadUrl.length - 1]?.url || apiSong.downloadUrl[0]?.url || '';
   } else if (apiSong.download_url && Array.isArray(apiSong.download_url) && apiSong.download_url.length > 0) {
     // Try to get the highest quality URL from download_url array
-    downloadUrl = apiSong.download_url[apiSong.download_url.length - 1]?.link || 
+    downloadUrl = apiSong.download_url[apiSong.download_url.length - 1]?.link ||
                 apiSong.download_url[0]?.link || '';
   }
-  
+
   // Get the high quality image or fallback to first available
   let artwork = '';
-  
+
   // Handle different image formats
   if (apiSong.image) {
     if (Array.isArray(apiSong.image)) {
       // Find the highest quality image (500x500)
-      const highQualityImage = apiSong.image.find((img: { quality: string; link: string }) => 
+      const highQualityImage = apiSong.image.find((img: { quality: string; link: string }) =>
         img.quality === '500x500'
       );
-      
+
       if (highQualityImage) {
         artwork = highQualityImage.link;
       } else {
@@ -38,13 +38,13 @@ export const convertApiSongToAppSong = (apiSong: any): Song => {
       artwork = apiSong.image;
     }
   }
-  
+
   return {
     id: apiSong.id,
     title: apiSong.name,
-    artist: apiSong.subtitle || 
-            apiSong.artists?.primary?.map((artist: any) => artist.name).join(', ') || 
-            apiSong.primary_artists?.map((artist: any) => artist.name).join(', ') || 
+    artist: apiSong.subtitle ||
+            apiSong.artists?.primary?.map((artist: any) => artist.name).join(', ') ||
+            apiSong.primary_artists?.map((artist: any) => artist.name).join(', ') ||
             'Unknown Artist',
     album: apiSong.album?.name || '',
     artwork: artwork,
@@ -127,7 +127,7 @@ export const getAlbumDetails = async (albumId: string): Promise<Song[]> => {
     console.error(`Error loading album songs:`, error);
     return [];
   }
-}; 
+};
 
 export const getTopSongs = async (query: string): Promise<Song[]> => {
   try {

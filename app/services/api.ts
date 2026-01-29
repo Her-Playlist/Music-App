@@ -166,7 +166,7 @@ class ApiClient {
 
       const queryParams = new URLSearchParams(queries).toString();
       const url = `${this.baseUrl}/${endpoint}?${queryParams}`;
-      
+
       console.log('API Request URL:', url);
 
       const response = await fetch(url, {
@@ -266,14 +266,14 @@ class ApiClient {
       if (token.includes('/')) {
         token = token.split('/').pop() || token;
       }
-      
+
       const response = await this.fetchApi<Artist>('artist', {
         token,
         n_song: '50',
         n_album: '50',
         mini: `${mini}`,
       });
-      
+
       if (response.status === 'Success') {
         return {
           success: true,
@@ -415,4 +415,4 @@ class ApiClient {
 
 // Create and export a singleton instance
 const apiClient = new ApiClient();
-export default apiClient; 
+export default apiClient;

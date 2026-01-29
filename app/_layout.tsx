@@ -13,7 +13,7 @@ import * as NavigationBar from 'expo-navigation-bar';
 // Create a separate component for content that needs the theme
 function ThemedContent() {
   const { isDark } = useTheme();
-  
+
   // Calculate the status bar height
   const statusBarHeight = Platform.OS === 'ios' ? 44 : RNStatusBar.currentHeight || 0;
 
@@ -30,18 +30,18 @@ function ThemedContent() {
     <NetworkProvider>
       <MusicProvider>
         <>
-          <Stack 
-            screenOptions={{ 
+          <Stack
+            screenOptions={{
               headerShown: false,
-              contentStyle: { 
-                paddingTop: Platform.OS === 'ios' ? 0 : statusBarHeight 
-              } 
+              contentStyle: {
+                paddingTop: Platform.OS === 'ios' ? 0 : statusBarHeight
+              }
             }}
           >
             <Stack.Screen name="+not-found" />
           </Stack>
-          <StatusBar 
-            style={isDark ? "light" : "dark"} 
+          <StatusBar
+            style={isDark ? "light" : "dark"}
             backgroundColor={isDark ? '#121212' : '#FFFFFF'}
             translucent={true}
           />
