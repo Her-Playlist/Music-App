@@ -131,28 +131,23 @@ export const getAlbumDetails = async (albumId: string): Promise<Song[]> => {
 
 export const getTopSongs = async (query: string): Promise<Song[]> => {
   try {
-    const result = await axios.get(`https://song-backend-latest.vercel.app/api/search?songName=${query}`);
-    const data = result.data.data;
-    // console.log("data.songs", data.songs);
-    return data.songs || [];
+    const result = await axios.get(`https://saavn.sumit.co/api/search/songs?query=${query}&limit=20`);
+    if (result.data && result.data.data) {
+      return result.data.data.map(convertApiSongToAppSong);
+    }
+    return [];
   } catch (error) {
     console.error(`Error loading top songs:`, error);
     return [];
   }
 };
-export const getRecommendations = async (name: string): Promise<Song[]> => {
+export const getRecommendations = async (songId: string): Promise<Song[]> => {
   try {
-    const result = await axios.get(`https://song-backend-latest.vercel.app/api/recommendations?songName=${name}&limit=100`);
-    return result.data.data.songs
-  } catch (error) {
-    console.error(`Error loading recommendations:`, error);
+    const result = await axios.get(`https://saavn.sumit.co/api/songs/${songId}/suggestions`);
+    if (result.data && result.data.data) {
+      return result.data.data.map(convertApiSongToAppSong);
+    }
     return [];
-  }
-}
-export const checkRecommendations = async (track: object): Promise<Song[]> => {
-  try {
-    const result = await axios.post(`https://song-backend-latest.vercel.app/api/check`, track);
-    return result.data.data
   } catch (error) {
     console.error(`Error loading recommendations:`, error);
     return [];

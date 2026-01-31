@@ -21,12 +21,12 @@ import {
   ListMusic,
   WifiOff,
 } from 'lucide-react-native';
-import { useMusic, Song as MusicSong } from '../components/music/MusicContext';
-import { useNetwork } from '../components/NetworkContext';
-import apiClient, { Song } from '../services/api';
+import { useMusic, Song as MusicSong } from '../../components/music/MusicContext';
+import { useNetwork } from '../../components/NetworkContext';
+import apiClient, { Song } from '../../services/api';
 import { router } from 'expo-router';
-import { useTheme } from '../hooks/useTheme';
-import { getTopSongs } from '../services/musicApi';
+import { useTheme } from '../../hooks/useTheme';
+import { getTopSongs } from '../../services/musicApi';
 
 // Sample genres
 const GENRES = [

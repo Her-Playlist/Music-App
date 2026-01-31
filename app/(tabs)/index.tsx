@@ -16,10 +16,10 @@ import {
 import { Play, Heart, RefreshCw, Disc, WifiOff } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Link, router, Stack } from 'expo-router';
-import { useMusic } from '../components/music/MusicContext';
-import { useNetwork } from '../components/NetworkContext';
-import apiClient from '../services/api';
-import { useTheme } from '../hooks/useTheme';
+import { useMusic } from '../../components/music/MusicContext';
+import { useNetwork } from '../../components/NetworkContext';
+import apiClient from '../../services/api';
+import { useTheme } from '../../hooks/useTheme';
 
 // Home screen category types
 interface Category {

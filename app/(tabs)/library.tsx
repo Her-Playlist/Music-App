@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView, FlatList, Image, TouchableOpacity, useColorScheme, Alert, TouchableHighlight, RefreshControl, Modal, Animated } from 'react-native';
 import { Play, Plus, Search, Download, Music, Trash2, X, MoreVertical, List, Wifi, WifiOff, DiscAlbum } from 'lucide-react-native';
-import { useMusic, Song as MusicSong } from '../components/music/MusicContext';
+import { useMusic, Song as MusicSong } from '../../components/music/MusicContext';
 import { router } from 'expo-router';
 import * as FileSystem from 'expo-file-system';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNetwork } from '../components/NetworkContext';
-import { useTheme } from '../hooks/useTheme';
+import { useNetwork } from '../../components/NetworkContext';
+import { useTheme } from '../../hooks/useTheme';
 
 // Define playlist type
 interface Playlist {

@@ -26,16 +26,16 @@ import {
   List,
 } from 'lucide-react-native';
 import { Stack, router } from 'expo-router';
-import { useMusic } from '../components/music/MusicContext';
-import { useNetwork } from '../components/NetworkContext';
-import { useTheme } from '../hooks/useTheme';
+import { useMusic } from '../../components/music/MusicContext';
+import { useNetwork } from '../../components/NetworkContext';
+import { useTheme } from '../../hooks/useTheme';
 import { LinearGradient } from 'expo-linear-gradient';
-import * as Audio from 'expo-av';
+import * as Audio from 'expo-audio';
 import Slider from '@react-native-community/slider';
 import * as FileSystem from 'expo-file-system';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import apiClient from '../services/api';
-import * as musicApi from '../services/musicApi';
+import apiClient from '../../services/api';
+import * as musicApi from '../../services/musicApi';
 
 // Get screen dimensions
 const { width } = Dimensions.get('window');

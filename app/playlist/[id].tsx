@@ -21,12 +21,12 @@ import {
   Download,
 } from 'lucide-react-native';
 import { useLocalSearchParams, Stack, router } from 'expo-router';
-import { useMusic } from '../components/music/MusicContext';
+import { useMusic } from '../../components/music/MusicContext';
 import { LinearGradient } from 'expo-linear-gradient';
-import apiClient from '../services/api';
+import apiClient from '../../services/api';
 import * as FileSystem from 'expo-file-system';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useTheme } from '../hooks/useTheme';
+import { useTheme } from '../../hooks/useTheme';
 
 export default function PlaylistScreen() {
   const { id, playlist: playlistName } = useLocalSearchParams();

@@ -22,11 +22,11 @@ import {
 } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, router, Stack } from 'expo-router';
-import { useMusic } from '../components/music/MusicContext';
-import apiClient from '../services/api';
+import { useMusic } from '../../components/music/MusicContext';
+import apiClient from '../../services/api';
 import * as FileSystem from 'expo-file-system';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useTheme } from '../hooks/useTheme';
+import { useTheme } from '../../hooks/useTheme';
 
 export default function AlbumDetails() {
   const { id, album } = useLocalSearchParams();

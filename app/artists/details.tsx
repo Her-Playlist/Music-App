@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, ScrollView, 
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ArrowLeft, Play, Pause, Heart } from 'lucide-react-native';
-import { useMusic } from '../components/music/MusicContext';
-import apiClient from '../services/api';
-import { useTheme } from '../hooks/useTheme';
+import { useMusic } from '../../components/music/MusicContext';
+import apiClient from '../../services/api';
+import { useTheme } from '../../hooks/useTheme';
 
 export default function ArtistDetailsScreen() {
   const params = useLocalSearchParams();

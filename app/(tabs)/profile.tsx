@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { Settings, Share2, Bell } from 'lucide-react-native';
-import { useTheme } from '../hooks/useTheme';
-import ThemeToggle from '../components/ThemeToggle';
+import { useTheme } from '../../hooks/useTheme';
+import ThemeToggle from '../../components/ThemeToggle';
 
 const stats = [
   { label: 'Followers', value: '2,345' },

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const BASE_URL = 'https://jiosaavn-api-ts-eight.vercel.app';
@@ -48,14 +47,14 @@ export interface ApiSong {
   album: {
     name: string;
   };
-  image: Array<{
+  image: {
     quality: string;
     url: string;
-  }>;
+  }[];
   duration: number;
-  download_url: Array<{
+  download_url: {
     url: string;
-  }>;
+  }[];
   year?: string;
 }
 
@@ -167,8 +166,6 @@ class ApiClient {
       const queryParams = new URLSearchParams(queries).toString();
       const url = `${this.baseUrl}/${endpoint}?${queryParams}`;
 
-      console.log('API Request URL:', url);
-
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -181,7 +178,6 @@ class ApiClient {
       }
 
       const data = await response.json();
-      console.log('API Response for:', endpoint, data.status, data.message);
       return data as ApiResponse<T>;
     } catch (error) {
       console.error(`Error fetching from ${endpoint}:`, error);

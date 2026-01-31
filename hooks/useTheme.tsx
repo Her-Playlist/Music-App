@@ -15,7 +15,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const systemColorScheme = useColorScheme();
   const [theme, setThemeState] = useState<ThemeType>('system');
-  
+
   useEffect(() => {
     // Load saved theme preference from storage
     const loadTheme = async () => {
@@ -28,10 +28,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         console.error('Failed to load theme:', error);
       }
     };
-    
+
     loadTheme();
   }, []);
-  
+
   const setTheme = async (newTheme: ThemeType) => {
     setThemeState(newTheme);
     try {
@@ -40,13 +40,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       console.error('Failed to save theme:', error);
     }
   };
-  
+
   // Determine if dark mode should be active based on the theme setting
-  const isDark = 
-    theme === 'system' 
+  const isDark =
+    theme === 'system'
       ? systemColorScheme === 'dark'
       : theme === 'dark';
-  
+
   return (
     <ThemeContext.Provider value={{ theme, isDark, setTheme }}>
       {children}
@@ -60,4 +60,4 @@ export const useTheme = () => {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
-}; 
+};

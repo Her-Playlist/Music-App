@@ -2,9 +2,8 @@ import React from 'react';
 import { Tabs } from 'expo-router';
 import { Library, Search, User, HomeIcon } from 'lucide-react-native';
 import { View, StyleSheet } from 'react-native';
-import MusicPlayerBar from '../components/music/MusicPlayerBar';
-import { useMusic } from '../components/music/MusicContext';
-import { useTheme } from '../hooks/useTheme';
+import MusicPlayerBar from '../../components/music/MusicPlayerBar';
+import { useTheme } from '../../hooks/useTheme';
 
 type TabIconProps = {
   color: string;
@@ -15,7 +14,7 @@ export default function TabLayout() {
   const { isDark } = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: isDark ? '#121212' : '#fff' }]}>
       <Tabs
         screenOptions={{
           headerShown: false,
@@ -23,7 +22,6 @@ export default function TabLayout() {
             backgroundColor: isDark ? '#121212' : '#fff',
             borderTopColor: isDark ? '#222' : '#eee',
             height: 55,
-            // Add bottom padding when needed
             paddingBottom: 0,
           },
           tabBarActiveTintColor: '#E53935',
@@ -58,11 +56,7 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-      
-      {/* Position the music player bar above the tab bar */}
-      <View style={styles.playerContainer}>
-        <MusicPlayerBar />
-      </View>
+      <MusicPlayerBar />
     </View>
   );
 }
@@ -70,13 +64,5 @@ export default function TabLayout() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: 'relative',
   },
-  playerContainer: {
-    position: 'absolute',
-    bottom: 55, // Height of the tab bar
-    left: 0,
-    right: 0,
-    zIndex: 100, // Make sure it's above other content
-  }
 });

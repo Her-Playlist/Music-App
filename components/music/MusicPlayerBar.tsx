@@ -4,7 +4,7 @@ import { Play, Pause, SkipBack, SkipForward } from 'lucide-react-native';
 import { router } from 'expo-router';
 import { useMusic } from './MusicContext';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useTheme } from '@/app/hooks/useTheme';
+import { useTheme } from '@/hooks/useTheme';
 
 const MusicPlayerBar = memo(() => {
   const colorScheme = useColorScheme();

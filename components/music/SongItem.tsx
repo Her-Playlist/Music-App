@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, useColorScheme } from 'react-native';
 import { Play, Pause, Download, MoreVertical } from 'lucide-react-native';
 import { useMusic, Song } from './MusicContext';
-import { useTheme } from '@/app/hooks/useTheme';
+import { useTheme } from '@/hooks/useTheme';
 
 interface SongItemProps {
   song: Song;
