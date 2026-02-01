@@ -137,6 +137,8 @@ interface ApiResponse<T> {
 
 class ApiClient {
   private baseUrl: string;
+  private readonly MAX_RETRIES = 3;
+  private readonly INITIAL_DELAY = 1000; // 1 second
 
   constructor() {
     this.baseUrl = BASE_URL;
@@ -152,9 +154,19 @@ class ApiClient {
     }
   }
 
+  private async delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  private isRetryableError(status: number): boolean {
+    // Retry on rate limit (429) and server errors (5xx)
+    return status === 429 || status >= 500;
+  }
+
   private async fetchApi<T>(
     endpoint: string,
-    params: Record<string, string> = {}
+    params: Record<string, string> = {},
+    retryCount = 0
   ): Promise<ApiResponse<T>> {
     try {
       const language = await this.getLanguage();
@@ -174,6 +186,15 @@ class ApiClient {
       });
 
       if (!response.ok) {
+        // Handle rate limiting and server errors with retry
+        if (this.isRetryableError(response.status) && retryCount < this.MAX_RETRIES) {
+          const delayMs = this.INITIAL_DELAY * Math.pow(2, retryCount);
+          console.warn(
+            `API ${response.status} error for ${endpoint}. Retrying in ${delayMs}ms... (attempt ${retryCount + 1}/${this.MAX_RETRIES})`
+          );
+          await this.delay(delayMs);
+          return this.fetchApi<T>(endpoint, params, retryCount + 1);
+        }
         throw new Error(`API error: ${response.status}`);
       }
 

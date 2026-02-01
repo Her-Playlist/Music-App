@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   View,
   Text,
@@ -517,50 +517,57 @@ export default function HomeScreen() {
     );
   };
 
-  // Render category section
-  const renderCategory = (category: Category) => {
-    const data = getCategoryData(category.type);
+  // Render category section with memoization
+  const renderCategory = useMemo(
+    () => (category: Category) => {
+      const data = getCategoryData(category.type);
 
-    let renderItem;
-    if (category.type === 'artists') {
-      renderItem = renderArtistItem;
-    } else if (category.type === 'featured') {
-      renderItem = renderPlaylistItem;
-    } else if (category.type === 'new') {
-      renderItem = renderAlbumItem;
-    } else {
-      renderItem = renderSongItem;
-    }
+      let renderItem;
+      if (category.type === 'artists') {
+        renderItem = renderArtistItem;
+      } else if (category.type === 'featured') {
+        renderItem = renderPlaylistItem;
+      } else if (category.type === 'new') {
+        renderItem = renderAlbumItem;
+      } else {
+        renderItem = renderSongItem;
+      }
 
-    return (
-      <View style={styles.categoryContainer}>
-        <Text style={[styles.categoryTitle, isDark && styles.darkText]}>
-          {category.title}
-        </Text>
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.categoryList}
-          ListEmptyComponent={
-            isLoading ? (
-              <ActivityIndicator
-                size="small"
-                color="#E53935"
-                style={styles.loader}
-              />
-            ) : (
-              <Text style={[styles.emptyText, isDark && styles.darkSubText]}>
-                No items to display
-              </Text>
-            )
-          }
-        />
-      </View>
-    );
-  };
+      return (
+        <View style={styles.categoryContainer}>
+          <Text style={[styles.categoryTitle, isDark && styles.darkText]}>
+            {category.title}
+          </Text>
+          <FlatList
+            data={data}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.categoryList}
+            removeClippedSubviews={true}
+            maxToRenderPerBatch={10}
+            updateCellsBatchingPeriod={50}
+            initialNumToRender={10}
+            ListEmptyComponent={
+              isLoading ? (
+                <ActivityIndicator
+                  size="small"
+                  color="#E53935"
+                  style={styles.loader}
+                />
+              ) : (
+                <Text style={[styles.emptyText, isDark && styles.darkSubText]}>
+                  No items to display
+                </Text>
+              )
+            }
+          />
+        </View>
+      );
+    },
+    [isDark, isLoading, renderArtistItem, renderPlaylistItem, renderAlbumItem, renderSongItem, getCategoryData]
+  );
 
   // Get data based on category type
   const getCategoryData = (type: string) => {
