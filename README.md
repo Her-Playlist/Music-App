@@ -1,50 +1,79 @@
-# Welcome to your Expo app 👋
+# Music App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern, cross-platform music streaming and management application built with React Native and Expo. Browse, discover, and manage your music library with an intuitive interface.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **Music Discovery**: Browse and search for songs, artists, and albums
+- **Playlists**: Create and manage personalized playlists
+- **Player Controls**: Full playback controls with play, pause, skip, and volume management
+- **Navigation**: Dedicated screens for exploring playlists, artists, albums, and personal music library
+- **Cross-Platform**: Run on iOS, Android, and web with a single codebase
+- **Modern UI**: Clean, responsive interface designed for mobile-first experience
+
+## Tech Stack
+
+- **Framework**: [React Native](https://reactnative.dev) with [Expo](https://expo.dev)
+- **Language**: TypeScript
+- **Routing**: [Expo Router](https://docs.expo.dev/router/introduction/) (file-based routing)
+- **Build Tool**: Expo with new architecture enabled
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and npm
+- Expo CLI (install globally with `npm install -g expo-cli`)
+
+### Installation
+
+1. Clone the repository and navigate to the project directory:
+
+   ```bash
+   cd music-app
+   ```
+
+2. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Start the development server:
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+### Running the App
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+From the Expo CLI output, choose one of the following options:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **iOS Simulator**: Press `i` (requires macOS with Xcode)
+- **Android Emulator**: Press `a` (requires Android Studio)
+- **Expo Go**: Scan the QR code with the [Expo Go](https://expo.dev/go) app on your phone
+- **Web**: Press `w` (runs in your default browser)
 
-## Get a fresh project
+## Project Structure
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+app/
+├── (tabs)/              # Tab-based navigation (Home, Search, Library, Profile)
+├── albums/              # Album detail screens
+├── artists/             # Artist detail screens
+├── player/              # Player UI and controls
+├── playlist/            # Playlist detail screens
+├── _layout.tsx          # Root layout
+├── modal.tsx            # Modal screens
+└── +not-found.tsx       # 404 page
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Development
 
-## Learn more
+The app uses file-based routing. To add new screens, create files in the `app/` directory. The file structure automatically becomes your app's navigation structure.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Learn More
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Expo Documentation](https://docs.expo.dev/): Complete guides and API reference
+- [React Native Docs](https://reactnative.dev/docs/getting-started): React Native fundamentals
+- [Expo Router Guide](https://docs.expo.dev/router/introduction/): File-based routing documentation
